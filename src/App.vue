@@ -180,8 +180,8 @@ const handlePositionsUpdated = (newPositions: any[]) => {
     
     <WarehouseMap 
       :positions="positions" 
-      :width="1430"
-      :height="685"
+      :width="1920"
+      :height="1080"
       :showGrid="false"
       backgroundColor="#f5f5f5"
       defaultPositionColor="#e0e0e0"
