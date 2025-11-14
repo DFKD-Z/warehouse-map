@@ -1,0 +1,47 @@
+# 开发文件
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# 依赖
+node_modules/
+
+# 构建相关
+src/
+public/
+index.html
+vite.config.ts
+tsconfig*.json
+
+# 测试
+*.test.ts
+*.spec.ts
+__tests__/
+coverage/
+
+# 文档（README.md 会包含）
+*.md
+!README.md
+
+# 示例
+examples/
+**/*Example.vue
+
+# Git
+.git/
+.gitignore
+
+# 其他
+.env
+.env.local
+*.log
+.DS_Store
+dist/**/*.map
+
+# 开发工具
+.prettierrc
+.eslintrc
+.editorconfig
+

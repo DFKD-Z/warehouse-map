@@ -1,12 +1,49 @@
 {
   "name": "warehouse-map",
-  "private": true,
-  "version": "0.0.0",
+  "version": "2.0.0",
+  "description": "A high-performance warehouse map visualization component built with Vue 3, TypeScript and Canvas",
   "type": "module",
+  "main": "./dist/warehouse-map.cjs.js",
+  "module": "./dist/warehouse-map.es.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "import": "./dist/warehouse-map.es.js",
+      "require": "./dist/warehouse-map.cjs.js",
+      "types": "./dist/index.d.ts"
+    },
+    "./style.css": "./dist/style.css"
+  },
+  "files": [
+    "dist",
+    "README.md"
+  ],
+  "keywords": [
+    "vue3",
+    "warehouse",
+    "map",
+    "visualization",
+    "canvas",
+    "typescript",
+    "warehouse-management",
+    "logistics"
+  ],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
   "scripts": {
     "dev": "vite",
-    "build": "vue-tsc -b && vite build",
-    "preview": "vite preview"
+    "build": "npm run build:lib && npm run build:types",
+    "build:lib": "vite build",
+    "build:types": "vue-tsc -p tsconfig.build.json",
+    "preview": "vite preview",
+    "prepublishOnly": "npm run build"
+  },
+  "peerDependencies": {
+    "vue": "^3.0.0"
   },
   "dependencies": {
     "vue": "^3.5.24"
