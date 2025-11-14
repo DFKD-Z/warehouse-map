@@ -108,6 +108,7 @@ import { useBusiness } from './useBusiness'
 import { useViewport } from './useViewport'
 import { usePerformance, defaultPerformanceConfig } from './usePerformance'
 import { useSelection } from './useSelection'
+import { useAlign } from './useAlign'
 
 // ==================== Props 定义 ====================
 const props = withDefaults(defineProps<{
@@ -153,6 +154,8 @@ const props = withDefaults(defineProps<{
   enableBatchOperations?: boolean
   // 是否启用框选（按住 Ctrl/Cmd + 拖动）
   enableSelection?: boolean
+  // 初始对齐方式
+  align?: 'center' | 'left-top' | 'left-bottom' | 'right-top' | 'right-bottom'
 }>(), {
   positions: () => [],
   width: 2000,
@@ -185,7 +188,8 @@ const props = withDefaults(defineProps<{
   performanceConfig: () => ({}),
   showPerformanceStats: false,
   enableBatchOperations: true,
-  enableSelection: true
+  enableSelection: true,
+  align: 'center'
 })
 
 // ==================== 事件定义 ====================
@@ -417,6 +421,23 @@ const {
   getScale,
 } = useViewport(state, optimizedRedraw)
 
+// ==================== 对齐逻辑 ====================
+const {
+  applyAlign,
+} = useAlign(
+  state,
+  canvasWidth,
+  canvasHeight,
+  {
+    positions: props.positions,
+    width: props.width,
+    height: props.height,
+    defaultW: props.defaultW,
+    defaultH: props.defaultH,
+    align: props.align
+  }
+)
+
 // ==================== 生命周期 ====================
 let resizeObserver: ResizeObserver | null = null
 let unbindContextMenu: (() => void) | undefined = undefined
@@ -425,6 +446,12 @@ onMounted(() => {
   nextTick(() => {
     // 初始化画布
     resizeCanvasToDisplaySize()
+    
+    // 根据对齐方式设置初始偏移量
+    if (props.positions.length > 0) {
+      applyAlign()
+    }
+    
     optimizedRedraw()
     
     // 使用防抖优化 resize 事件

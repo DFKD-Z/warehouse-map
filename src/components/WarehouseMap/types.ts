@@ -34,6 +34,7 @@ export interface WarehouseMapProps {
   enablePan: boolean
   enableContextMenu: boolean
   contextMenuItems: ContextMenuItem[]
+  align: 'center' | 'left-top' | 'left-bottom' | 'right-top' | 'right-bottom'
 }
 
 // 右键菜单项类型

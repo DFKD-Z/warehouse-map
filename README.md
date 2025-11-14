@@ -179,6 +179,7 @@ function handleSelectionChange(selectedIds: (string | number)[]) {
 | `enableBatchOperations` | `boolean` | `false` | 是否启用批量操作 |
 | `showPerformanceStats` | `boolean` | `false` | 是否显示性能统计 |
 | `performanceConfig` | `PerformanceConfig` | - | 性能配置选项 |
+| `align` | `'center' \| 'left-top' \| 'left-bottom' \| 'right-top' \| 'right-bottom'` | `'center'` | 初始对齐方式 |
 
 ### Events
 

@@ -16,6 +16,7 @@ WarehouseMap/
 ├── useViewport.ts        # 视口控制逻辑
 ├── useSelection.ts       # 框选功能逻辑
 ├── usePerformance.ts     # 性能优化逻辑
+├── useAlign.ts           # 对齐逻辑
 ├── exports.ts            # 统一导出文件
 ├── examples/             # 示例代码
 │   └── PerformanceExample.vue
@@ -159,7 +160,17 @@ WarehouseMap/
 - `startFPSMonitoring()` - 启动 FPS 监控
 - `stopFPSMonitoring()` - 停止 FPS 监控
 
-#### 🔟 **index.vue** - 主组件
+#### 🔟 **useAlign.ts** - 对齐逻辑
+负责初始视图对齐：
+- ✅ 计算库位边界框
+- ✅ 根据对齐方式计算初始偏移量
+- ✅ 支持多种对齐方式（center、left-top、left-bottom、right-top、right-bottom）
+
+**核心方法：**
+- `calculateBounds()` - 计算所有库位的边界框
+- `applyAlign()` - 根据配置的对齐方式应用初始偏移量
+
+#### 1️⃣1️⃣ **index.vue** - 主组件
 组装所有模块，提供统一的对外接口：
 - ✅ 组件 Props 和 Emits 定义
 - ✅ 生命周期管理
@@ -370,6 +381,26 @@ function handlePositionsUpdated(newPositions: Position[]) {
 </script>
 ```
 
+### 对齐方式配置
+
+```vue
+<template>
+  <WarehouseMap
+    :positions="positions"
+    :width="2000"
+    :height="1000"
+    align="center"
+  />
+</template>
+```
+
+**对齐选项：**
+- `center` - 居中显示（默认）
+- `left-top` - 左上对齐
+- `left-bottom` - 左下对齐
+- `right-top` - 右上对齐
+- `right-bottom` - 右下对齐
+
 ### 性能优化配置
 
 ```vue
@@ -478,7 +509,8 @@ index.vue (主组件)
 ├── useBusiness.ts (依赖 useRenderer)
 ├── useViewport.ts (依赖 useRenderer)
 ├── useSelection.ts (依赖 useCanvas, useRenderer)
-└── usePerformance.ts (独立工具模块)
+├── usePerformance.ts (独立工具模块)
+└── useAlign.ts (依赖 useCanvas, state)
 ```
 
 ## 🔄 数据流

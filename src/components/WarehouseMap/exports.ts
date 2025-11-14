@@ -30,6 +30,8 @@ export { useBusiness } from './useBusiness'
 export { useViewport } from './useViewport'
 export { usePerformance, defaultPerformanceConfig } from './usePerformance'
 export { useSelection } from './useSelection'
+export { useAlign } from './useAlign'
+export type { Bounds, AlignConfig } from './useAlign'
 
 // 导出工具函数
 export { debounce, throttle, rafThrottle } from './usePerformance'
